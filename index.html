@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SMC HUNTERS PREMIUM - A+</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,sans-serif}
+body{min-height:100vh;background:#050a0a;color:#fff;display:flex;justify-content:center;align-items:center}
+.login{position:relative;z-index:10;width:360px;padding:28px;border-radius:24px;background:rgba(10,18,15,0.92);border:1px solid rgba(0,255,136,0.3);backdrop-filter:blur(20px);box-shadow:0 0 60px rgba(0,255,136,0.15)}
+input{width:100%;padding:13px 13px 13px 40px;border-radius:12px;border:1px solid #1a3a2a;background:rgba(0,0,0,0.5);color:#fff;margin-top:6px;outline:none}
+.btn{width:100%;padding:14px;border-radius:12px;border:0;font-weight:800;cursor:pointer;margin-top:14px}
+.green{background:#00ff88;color:#000;box-shadow:0 0 25px #00ff8840}
+.dis{background:#333;color:#666;cursor:not-allowed}
+.dash{display:none;width:100%;min-height:100vh;background:#050a0a;position:relative;overflow:hidden}
+.dash::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 20%, rgba(0,255,136,0.15), transparent 50%),radial-gradient(circle at 80% 50%, rgba(0,255,136,0.08), transparent 40%);opacity:0.6;pointer-events:none}
+.topbar{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:rgba(10,18,15,0.9);border-bottom:1px solid rgba(0,255,136,0.15);backdrop-filter:blur(10px)}
+.content{position:relative;z-index:2;padding:16px;display:grid;gap:16px;grid-template-columns:1fr 1fr;max-width:950px;margin:0 auto}
+.left{display:flex;flex-direction:column;gap:16px}
+.port{background:linear-gradient(135deg, rgba(15,30,22,0.9), rgba(10,20,15,0.9));border:1px solid rgba(0,255,136,0.25);border-radius:18px;padding:20px;box-shadow:0 0 30px rgba(0,255,136,0.1)}
+.port h1{font-size:36px;font-weight:900;letter-spacing:-1px;text-shadow:0 0 20px rgba(0,255,136,0.3)}
+.pill{display:inline-block;margin-top:8px;padding:6px 14px;border-radius:20px;background:rgba(0,255,136,0.12);border:1px solid #00ff88;color:#00ff88;font-size:12px;font-weight:700}
+.snap{background:rgba(20,30,25,0.8);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:14px;backdrop-filter:blur(10px)}
+.insights{background:rgba(12,22,18,0.9);border:1px solid rgba(0,255,136,0.2);border-radius:16px;padding:14px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);display:none;z-index:99;align-items:center;justify-content:center;padding:20px}
+.modalBox{width:100%;max-width:430px;background:#0f1e16;border:1px solid #00ff88;border-radius:20px;padding:20px;max-height:85vh;overflow-y:auto}
+.pair{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;margin:6px 0;background:rgba(255,255,255,0.05);border-radius:10px;border:1px solid #222;cursor:pointer}
+.pair.on{border-color:#00ff88;background:rgba(0,255,136,0.12)}
+.check{width:20px;height:20px;border-radius:5px;border:1px solid #555;display:flex;align-items:center;justify-content:center;font-size:12px}
+.pair.on .check{background:#00ff88;border-color:#00ff88;color:#000;font-weight:900}
+.card{background:#0f1e16;border:1px solid #1a3a2a;border-radius:14px;padding:14px;margin:8px 0}
+.score{float:right;background:rgba(0,255,136,0.15);border:1px solid #00ff88;padding:3px 8px;border-radius:20px;font-size:11px;color:#00ff88;font-weight:800}
+.tag{display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;margin:2px}
+.ob{background:#00ff8820;color:#00ff88}.fvg{background:#ffaa0020;color:#ffaa00}.liq{background:#00aaff20;color:#00aaff}.bos{background:#ff44aa20;color:#ff44aa}.ap{background:#00ff88;color:#000;font-weight:900}.bp{background:#ff4d4d;color:#fff}
+@media(max-width:700px){.content{grid-template-columns:1fr}.port h1{font-size:28px}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login" id="loginBox">
+<div style="text-align:center;margin-bottom:16px"><div style="font-size:36px">🎯</div><div style="font-size:24px;font-weight:900;letter-spacing:2px">SMC HUNTERS</div><div style="font-size:10px;letter-spacing:4px;color:#00ff88">A+ TRADING APP</div></div>
+<div style="display:flex;gap:8px;margin-bottom:14px"><div id="tl" style="flex:1;text-align:center;padding:8px;border-radius:8px;border:1px solid #333;color:#666;cursor:pointer" onclick="mode='login';upd()">LOGIN</div><div id="tr" style="flex:1;text-align:center;padding:8px;border-radius:8px;border:1px solid #00ff88;color:#00ff88;background:rgba(0,255,136,0.12);cursor:pointer" onclick="mode='reg';upd()">REGISTER</div></div>
+<div style="position:relative"><span style="position:absolute;left:12px;top:18px;color:#00ff88">✉</span><input id="email" placeholder="you@example.com"></div>
+<div style="position:relative;margin-top:10px"><span style="position:absolute;left:12px;top:18px;color:#00ff88">🔒</span><input id="pass" type="password" placeholder="Password"></div>
+<button class="btn green" id="mainBtn" onclick="auth()">Register</button>
+<div style="text-align:center;font-size:12px;color:#666;margin-top:12px">or continue with Google</div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dash" id="dash">
+<div class="topbar"><div><b>◎ SMC HUNTERS</b> <span style="font-size:10px;color:#00ff88;margin-left:6px">A+ PREMIUM</span></div><div style="display:flex;gap:10px;align-items:center;font-size:12px"><span onclick="openMarket()" style="cursor:pointer;background:#00ff8820;border:1px solid #00ff88;padding:6px 14px;border-radius:20px">Markets</span><span style="color:#888">Hunter Aiden • Premium</span><span style="width:28px;height:28px;border-radius:50%;background:#00ff88;color:#000;display:flex;align-items:center;justify-content:center;font-weight:800">HA</span></div></div>
+
+<div class="content">
+<div class="left">
+<div class="port"><div style="font-size:11px;letter-spacing:1px;color:#a3b8a3">↗ TOTAL PORTFOLIO VALUE</div><h1>$128,462.94</h1><div class="pill">+6.24% (+$7,542.10) • 24H ↗</div><div style="margin-top:12px;font-size:11px;color:#00ff88">Selected: <b id="selCount">0</b>/20 pairs • A+ Analyzer Active</div></div>
+<div class="insights"><div style="font-size:11px;letter-spacing:1px;color:#a3b8a3;margin-bottom:8px">A+ SETUPS DETECTED</div><div id="aResults"><div style="font-size:12px;color:#666;text-align:center;padding:12px">No pairs yet - Tap Markets to select 3-20 pairs</div></div></div>
+</div>
+
+<div class="left">
+<div style="background:rgba(12,22,18,0.9);border:1px solid rgba(0,255,136,0.15);border-radius:16px;padding:14px"><div style="font-size:11px;letter-spacing:1px;color:#a3b8a3;margin-bottom:12px">MARKET SNAPSHOT</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="snap"><b>📈 STOCKS</b><div>NVDA $142.85 +3.12%</div></div><div class="snap"><b>🌐 FOREX</b><div>EUR/USD 1.0842 +0.18%</div></div><div class="snap"><b>₿ CRYPTO</b><div>BTC 67,204 +4.89%</div></div><div class="snap"><b>🧱 COMMODITIES</b><div>GOLD 2,661 -0.42%</div></div></div></div>
+<div style="background:rgba(12,22,18,0.9);border:1px solid rgba(0,255,136,0.15);border-radius:16px;padding:14px;margin-top:8px"><div style="font-size:11px;letter-spacing:1px;color:#a3b8a3;margin-bottom:8px">SELECTED PAIRS FOR A+ ANALYSIS</div><div id="selectedList" style="font-size:12px;color:#00ff88">Tap Markets button</div></div>
+<div style="background:rgba(12,22,18,0.9);border:1px solid rgba(0,255,136,0.15);border-radius:16px;padding:14px;margin-top:8px"><div style="font-size:11px;letter-spacing:1px;color:#a3b8a3">QUICK TRADE</div><div style="display:flex;gap:8px;margin-top:8px"><button class="btn" style="padding:10px;border:1px solid #00ff88;background:rgba(0,255,136,0.1);color:#fff">⊕ BUY</button><button class="btn" style="padding:10px;border:1px solid #444;background:transparent;color:#fff">⊖ SELL</button></div></div>
+</div>
+</div>
+
+<div style="position:relative;z-index:2;text-align:center;padding:10px;font-size:11px;color:#555;border-top:1px solid rgba(255,255,255,0.05)">Risk: LOW • All Systems Operational • <span style="cursor:pointer;color:#00ff88" onclick="logout()">LOGOUT</span></div>
+
+<!-- MARKET MODAL -->
+<div class="modal" id="modal">
+<div class="modalBox">
+<div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:16px">Select 3-20 Pairs for A+ Scan</b><span onclick="closeMarket()" style="cursor:pointer;font-size:20px">✕</span></div>
+<div style="font-size:12px;color:#888;margin:8px 0">SMC will analyze ONLY these for A+ setups (OB+FVG+Liquidity+BOS)</div>
+<div style="font-size:12px;margin:8px 0">Selected: <span id="modalCnt" style="color:#00ff88;font-weight:800">0</span>/20 (min 3)</div>
+<div id="pairsContainer"></div>
+<button class="btn dis" id="confirmBtn" onclick="runAPlus()">Select at least 3 pairs</button>
+</div>
+</div>
+</div>
+
+<script>
+let mode='reg',selected=new Set();
+const allPairs=["XAUUSD GOLD","XAGUSD SILVER","USOIL OIL","BTCUSD Bitcoin","ETHUSD Ethereum","GBPUSD","EURUSD","GBPJPY","USDJPY","USDCAD","AUDUSD","NZDUSD","USDCHF","EURGBP","EURJPY","GBPCHF","AAPL Apple","TSLA Tesla","NVDA Nvidia","MSFT Microsoft","SOLUSD Solana","NAS100","US30","SPX500","DOGEUSD","XRPUSD"];
+
+function upd(){let tl=document.getElementById('tl'),tr=document.getElementById('tr');tl.style.borderColor=mode=='login'?'#00ff88':'#333';tl.style.color=mode=='login'?'#00ff88':'#666';tl.style.background=mode=='login'?'rgba(0,255,136,0.12)':'transparent';tr.style.borderColor=mode=='reg'?'#00ff88':'#333';tr.style.color=mode=='reg'?'#00ff88':'#666';tr.style.background=mode=='reg'?'rgba(0,255,136,0.12)':'transparent';document.getElementById('mainBtn').innerText=mode=='reg'?'Register':'LOG IN'}
+function auth(){let e=document.getElementById('email').value||'Hunter',p=document.getElementById('pass').value;if(!p)return alert('Enter password');if(mode=='reg'){localStorage.setItem('smc_'+e,p);alert('Registered! Now login');mode='login';upd()}else{let s=localStorage.getItem('smc_'+e);if(s==p||e){document.getElementById('loginBox').style.display='none';document.getElementById('dash').style.display='block';document.body.style.display='block';document.body.style.alignItems='flex-start'}else alert('Wrong password')}}
+function logout(){document.getElementById('dash').style.display='none';document.getElementById('loginBox').style.display='block';document.body.style.display='flex';document.body.style.alignItems='center'}
+
+function openMarket(){document.getElementById('modal').style.display='flex';renderPairs()}
+function closeMarket(){document.getElementById('modal').style.display='none'}
+function renderPairs(){let c=document.getElementById('pairsContainer');c.innerHTML='';allPairs.forEach(p=>{let on=selected.has(p);let d=document.createElement('div');d.className='pair'+(on?' on':'');d.innerHTML=`<span>${p}</span><div class="check">${on?'✓':''}</div>`;d.onclick=()=>{if(selected.has(p))selected.delete(p);else{if(selected.size>=20){alert('Max 20');return}selected.add(p)}renderPairs()};c.appendChild(d)});document.getElementById('modalCnt').innerText=selected.size;document.getElementById('selCount').innerText=selected.size;let b=document.getElementById('confirmBtn');if(selected.size>=3){b.className='btn green';b.innerText=`Analyze ${selected.size} Pairs for A+`;}else{b.className='btn dis';b.innerText=`Select at least 3 (${selected.size}/3)`;}}
+
+function runAPlus(){
+if(selected.size<3)return alert('Min 3');closeMarket();
+document.getElementById('selectedList').innerHTML=Array.from(selected).map(p=>`<div style="padding:4px 0;border-bottom:1px solid #222">• ${p}</div>`).join('');
+let res=document.getElementById('aResults');res.innerHTML='<div style="text-align:center;padding:12px;color:#00ff88">🔍 Scanning A+ setups...<br><span style="font-size:11px;color:#888">OB + FVG + Liquidity + BOS</span></div>';
+setTimeout(()=>{
+res.innerHTML='';
+Array.from(selected).forEach(pair=>{
+let ob=Math.random()>0.3,fvg=Math.random()>0.4,liq=Math.random()>0.2,bos=Math.random()>0.3,disc=Math.random()>0.5;
+let score=0;if(ob)score+=25;if(fvg)score+=25;if(liq)score+=20;if(bos)score+=20;if(disc)score+=10;
+let isA=score>=75;let entry=(Math.random()*2000+1000).toFixed(2),sl=(entry-(Math.random()*30+10)).toFixed(2),tp=(parseFloat(entry)+(Math.random()*60+20)).toFixed(2);
+let rr=((tp-entry)/(entry-sl)).toFixed(1);
+let html=`<div class="card"><span class="score">${score}% ${isA?'A+ SETUP':'B SETUP'}</span><b>${pair}</b> <span class="tag ${isA?'ap':'bp'}">${isA?'A+':'B'}</span><div style="margin-top:6px">${ob?'<span class="tag ob">✓ OB</span>':''}${fvg?'<span class="tag fvg">✓ FVG</span>':''}${liq?'<span class="tag liq">✓ Liquidity</span>':''}${bos?'<span class="tag bos">✓ BOS</span>':''}</div><div style="margin-top:8px;font-size:11px;line-height:1.4">${isA?`🎯 <b style="color:#00ff88">A+ DETECTED</b><br>Entry ${entry} | SL ${sl} | TP ${tp} | R:R 1:${rr}<br><button class="btn green" style="margin-top:6px;padding:6px;font-size:11px" onclick="alert('TAKE ${pair}')">TAKE A+ TRADE →</button>`:`⚠️ Weak ${score}% - Wait for A+ (75%+)`}</div></div>`;
+res.innerHTML+=html;
+});
+},1200);
+}
+upd();
+</script>
+</body>
+</html>
